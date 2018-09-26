@@ -1,0 +1,289 @@
+@import 'mixins','common';
+
+
+/**
+*	Style sheet for Coding Animation Development. This style sheet is coded in sections as follows
+*	A1.0 Debug Buttons
+*	A2.0 Placeholders
+*	A3.0 Container styles
+* 	A4.0 Block Containers
+*		A4.1 Sun Container
+*		A4.2 Wave Container
+*		A4.3 Cloud Container
+*			A3.3.1 Cloud 1
+*			A3.3.2 Cloud 2
+*			A3.3.3 Cloud 3
+*			A3.3.4 Cloud 4
+*			A3.3.5 Cloud 5
+*		A4.4 Seagull Container
+*			A4.4.1 Seagull 1
+*			A4.4.2 Seagull 2
+*			A4.4.3 Seagull 3
+*		A4.5 Product Container
+*	A5.0 Keyframes
+
+*
+*/
+
+
+
+/**
+*
+*	A1.0 Debug Button 
+*	The debug button allows the user to stop all animations by double clicking the top right corner
+*/
+
+#debug_button {
+	@include fixed(top 3px right 5%);
+	@include box(100px, 50px);
+	z-index: 1000;
+    background-color: rgba(0,0,0, 0.1);
+	color: white;
+}
+#debug_button2 {
+    @include fixed(top 3px right 5%);
+    @include box(100px, 50px);
+	z-index: 990;
+    background-color: rgba(0,0,0, 0.1);
+	color: white;
+}
+/**
+*
+*	A2.0 Variables and maps
+*
+*/
+
+$map--Cloud:(
+	1:random(40) * 1+px,
+	2:random(40) * 2+px,
+	3:random(40) * 3+px,
+	4:random(40) * 4+px,
+	5:random(40) * 5+px
+	);
+
+$map--Seagulls:(
+	1:random(250) * 1+px,
+	2:random(250) * 2+px,
+	3:random(250) * 3+px,
+	);
+
+
+
+/**
+*	A3.0 Container styles
+*
+*/
+
+
+.container {
+	@include box (1920px, 1080px);
+	display:inline-grid;
+	background-image: url(../../FrozenDrinkAssets/assets/bg.png);
+	background-repeat:no-repeat;
+	grid-template-columns: [col1-start] 200px [col2-start] 230px [col3-start] 1120px [col4-start] 100px [col5-start] 270px;
+	grid-template-rows: [row1-start] 100px [row2-start] 150px [row3-start] 140px [row4-start] 140px [row5-start] 175px [row6-start] 374px;
+}
+
+
+/**
+*	A3.0 Block Containers
+*		A3.1 Sun Container
+*
+*/
+
+.sun{
+	grid-column-start:col2-start;
+	grid-column-end:col3-start;
+	grid-row-start:row2-start;
+	grid-row-end:row4-start;
+}
+.sun__image{animation:spinning-infinite 30s linear 0s infinite;}
+
+/**
+*
+*		A3.2 Wave Container
+*
+*/
+
+
+.waves{
+	grid-column-start:col1-start;
+	grid-column-end:col6-start;
+	grid-row-start:row5-start;
+	grid-row-end:row6-start;
+	div[class^="waves--color-"]{
+		@include box(2820px, 88px);
+		animation-name:Shift-Horizontal-Sm;
+		animation-duration:10s; 
+		animation-timing-function:ease-in-out;
+		animation-direction:alternate;
+		animation-iteration-count:infinite;
+
+	}
+
+	
+}
+.waves--color-white{
+		@include margin(0, -400px, 0);
+		animation-delay:0s;
+		background-image:url(../../FrozenDrinkAssets/assets/wave3.png);
+	}
+.waves--color-lgBlue{
+		@include margin(-44px, -430px, 0);
+		animation-delay:3s;
+		background-image:url(../../FrozenDrinkAssets/assets/wave2.png);
+	}
+.waves--color-blue{
+		@include margin(-44px, -200px, 0);
+		animation-delay:6s;
+		background-image:url(../../FrozenDrinkAssets/assets/wave1.png);
+	}
+
+/**
+*
+*		A3.3 Cloud Container
+*			A3.3.1 Cloud 1
+*			A3.3.2 Cloud 2
+*			A3.3.3 Cloud 3
+*			A3.3.4 Cloud 4
+*			A3.3.5 Cloud 5
+*/
+
+.clouds{
+	grid-column-start:col1-start;
+	grid-column-end:col6-start;
+	grid-row-start:row1-start;
+	grid-row-end:row5-start;
+
+
+}
+@for $iclouds from 1 through 5{
+	.clouds__image-#{$iclouds}{
+		@include margin(0, map-get($map--Cloud,$iclouds), random(10) * $iclouds+px);
+		z-index:$iclouds;
+	}
+}
+
+
+/*   	A3.3.1 Cloud 1      */
+.clouds__image-1{
+	animation:Shift-Horizontal-cloud-1 80s linear 0s 1, Shift-Horizontal-Full 80s linear 0s infinite;
+}
+/*   	A3.3.2 Cloud 2      */
+.clouds__image-2{
+	animation:Shift-Horizontal-cloud-2 60s linear 0s 1, Shift-Horizontal-Full 60s linear 0s infinite;
+}
+/*   	A3.3.3 Cloud 3      */
+.clouds__image-3{
+	animation:Shift-Horizontal-cloud-3 100s linear 0s 1, Shift-Horizontal-Full 100s linear 0s infinite;
+}
+/*   	A3.3.4 Cloud 4      */
+.clouds__image-4{
+	animation:Shift-Horizontal-cloud-4 70s linear 0s 1, Shift-Horizontal-Full 70s linear 0s infinite;
+}
+
+
+/**
+*
+*		A3.4 Seagull Container
+*
+*/
+
+.seagulls{
+	grid-column-start:col1-start;
+	grid-column-end:col6-start;
+	grid-row-start:row2-start;
+	grid-row-end:row4-start;
+}
+@for $isea from 1 through 3{
+	.seagulls__image-#{$isea}{
+		@include margin(random(75) * $isea+px, map-get($map--Seagulls,$isea), random(100) * $isea+px)
+	}
+}
+
+/*   	A3.4.1 Seagull 1      */
+.seagulls__image-1{
+	animation:Shift-Horizontal-seagull-1 100s linear 0s 1, Shift-Horizontal-Full 100s linear 0s infinite;
+}
+/*   	A3.4.2 Seagull 2      */
+.seagulls__image-2{
+	animation:Shift-Horizontal-seagull-2 120s linear 0s 1, Shift-Horizontal-Full 120s linear 0s infinite;
+}
+/*   	A3.4.3 Seagull 3      */
+.seagulls__image-3{
+	animation:Shift-Horizontal-seagull-3 80s linear 0s 1, Shift-Horizontal-Full 80s linear 0s infinite;
+}
+
+
+/**
+*
+*		A3.5 Product Container
+*
+*/
+
+.product{
+	grid-column-start:col1-start;
+	grid-column-end:col6-start;
+	grid-row-start:row1-start;
+	grid-row-end:row5-start;
+}
+
+
+/**
+*
+*
+* 	A4.0 Keyframes
+*
+*/
+
+@keyframes spinning-infinite{
+	from{transform:rotate(0deg)}
+	to{transform:rotate(360deg)}
+
+}
+@keyframes Shift-Vertical{
+	from{top:150px;}
+	to{top:-100px;}
+}
+@keyframes Shift-Horizontal-Sm{
+	from{margin-left:-400px;}
+	to{margin-left:-230px;}
+}
+@keyframes Shift-Horizontal-cloud-1{
+	from{transform: translateX(map-get($map--Cloud,1));}
+	to{transform: translateX(1920px);}
+}
+@keyframes Shift-Horizontal-cloud-2{
+	from{transform: translateX(map-get($map--Cloud,2));}
+	to{transform: translateX(1920px);}
+}
+@keyframes Shift-Horizontal-cloud-3{
+	from{transform: translateX(map-get($map--Cloud,3));}
+	to{transform: translateX(1920px);}
+}
+@keyframes Shift-Horizontal-cloud-4{
+	from{transform: translateX(map-get($map--Cloud,4));}
+	to{transform: translateX(1920px);}
+}
+@keyframes Shift-Horizontal-cloud-5{
+	from{transform: translateX(map-get($map--Cloud,5));}
+	to{transform: translateX(1920px);}
+}
+@keyframes Shift-Horizontal-seagull-1{
+	from{transform: translateX(map-get($map--Seagulls,1));}
+	to{transform: translateX(1920px);}
+}
+@keyframes Shift-Horizontal-seagull-2{
+	from{transform: translateX(map-get($map--Seagulls,2));}
+	to{transform: translateX(1920px);}
+}
+@keyframes Shift-Horizontal-seagull-3{
+	from{transform: translateX(map-get($map--Seagulls,3));}
+	to{transform: translateX(1920px);}
+}
+@keyframes Shift-Horizontal-Full{
+	from{transform: translateX(-500px);}
+	to{transform: translateX(1920px)}
+
+}
+

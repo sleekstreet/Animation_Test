@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	  	<meta charset="UTF-8">
+	 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	  	<title>Coates - Animation Test</title>
+	  	<link rel="stylesheet" href="dist/app.css">
+	</head>
+
+	<body>
+	  	<button id="debug_button"> pause </button>
+		<button id="debug_button2"> play </button>
+		<div class= "container">
+			<div class="sun">
+				<img class="sun__image" src="../FrozenDrinkAssets/assets/sun.png"/>
+			</div>
+			<div class="clouds clouds--play">
+				<img class="clouds__image-1" src="../FrozenDrinkAssets/assets/cloud1.png"/>
+				<img class="clouds__image-2" src="../FrozenDrinkAssets/assets/cloud2.png"/>
+				<img class="clouds__image-3" src="../FrozenDrinkAssets/assets/cloud3.png"/>
+				<img class="clouds__image-4" src="../FrozenDrinkAssets/assets/cloud4.png"/>
+				
+
+			</div>
+			<div class="seagulls">
+				<img class="seagulls__image-1" src="../FrozenDrinkAssets/assets/seagull1.png"/>
+				<img class="seagulls__image-2" src="../FrozenDrinkAssets/assets/seagull2.png"/>
+				<img class="seagulls__image-3" src="../FrozenDrinkAssets/assets/seagull3.png"/>
+			</div>
+			<div class="waves waves--play">
+				<div class="waves--color-white"></div>
+				<div class="waves--color-lgBlue"></div>
+				<div class="waves--color-blue"></div>
+			</div>
+			<div class="product">
+				<img class="product__image" src="../FrozenDrinkAssets/assets/product.png"/>
+			</div>
+		</div>
+	 	<!--<script type="text/javascript" src="../Content/js/app.js"></script> -->
+		<script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    	<script>
+			function main(){
+				$("#debug_button").on('click',function(){
+					$(".sun__image, .waves--play div, .clouds--play img").css("-webkit-animation-play-state", "paused");
+					$(this).fadeOut();	
+					$("#debug_button2").fadeIn();
+				});
+				$("#debug_button2").on('click',function(){
+					$(".sun__image, .waves--play div, .clouds--play img").css("-webkit-animation-play-state", "running");
+					$(this).fadeOut();	
+					$("#debug_button").fadeIn();
+				});
+			}
+    		$(document).ready(main);	
+    	</script> 
+	</body>
+
+</html>

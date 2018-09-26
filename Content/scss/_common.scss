@@ -1,0 +1,12 @@
+@import 'mixins.scss';
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	@include box(1920px, 1080px);
+	overflow: hidden;
+}
+
